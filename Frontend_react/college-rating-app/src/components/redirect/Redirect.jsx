@@ -1,30 +1,39 @@
-// Redirect.js
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Redirect = () => {
-    useEffect(() => {
-        const handleTokenResponse = async () => {
-          const response = await fetch('http://localhost:8085/auth/login', {
-            method: 'GET',
-            credentials: 'include', // Include cookies, if any
-          });
-          if (response.ok) {
-            const { accessToken, userId } = await response.json();
-            localStorage.setItem('access_token', accessToken);
-            localStorage.setItem('user_email', userId); // Assuming userId is the email
-            // Redirect to dashboard
-            window.location.href = '/dashboard';
-          } else {
-            console.error("Failed to fetch token");
-            // Handle error appropriately
-          }
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get("http://localhost:8085/auth/user-info");
+        const { accessToken, userId, userName } = response.data;
+
+        // Create a user object
+        const user = {
+          accessToken,
+          userEmail: userId,
+          userName,
         };
-    
-        handleTokenResponse();
-      }, []); // Empty dependency array to run only once on mount
-    
-      return <div>Loading...</div>; // Optional loading message while waiting for the token
+
+        // Store the user object in localStorage
+        localStorage.setItem("user", JSON.stringify(user));
+
+        // Redirect to the dashboard
+        window.location.href = "/login"; // or use React Router's useHistory hook to navigate
+      } catch (error) {
+        console.error("Failed to fetch user info:", error);
+        // Handle error (e.g., show a message to the user)
+      }
     };
+
+    fetchUserInfo();
+  }, []);
+
+  return (
+    <div>
+      <h2>Redirecting...</h2>
+    </div>
+  );
+};
 
 export default Redirect;

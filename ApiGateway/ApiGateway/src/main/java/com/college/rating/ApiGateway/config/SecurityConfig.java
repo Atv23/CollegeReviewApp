@@ -1,7 +1,5 @@
 package com.college.rating.ApiGateway.config;
 
-import com.college.rating.ApiGateway.controller.CustomAuth2LoginSuccesHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -19,10 +17,12 @@ public class SecurityConfig {
     {
         http
                 .authorizeExchange((authorize)->authorize
+                        .pathMatchers("/auth/user-info").permitAll()
                         .anyExchange()
                         .authenticated()
 
                 )
+                .cors().and()
                 .csrf((csrf)->csrf
                         .disable())
 //                .oauth2Login((oath2)-> oath2

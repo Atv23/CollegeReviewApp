@@ -14,6 +14,7 @@ import java.util.Collection;
 public class AuthResponse {
 
     private String userId;
+    private String userName;
     private String accessToken;
     private String refreshToken;
     private long expireAt;

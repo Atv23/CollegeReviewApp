@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import { checkUserExists, setUser } from "../../services/userService";
@@ -10,7 +10,15 @@ const Login = () => {
     userName: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [userExists, setUserExists] = useState(false);
 
+  // Check if user exists in localStorage on component mount
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      setUserExists(true); // Set to true if user exists
+    }
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -58,7 +66,13 @@ const Login = () => {
             required
           />
 
-          <button type="submit" >Login(disabled)</button>
+          <button
+            type="submit"
+            disabled={!userExists} // Disable if user exists
+            className={userExists ? "" : "btn btn-danger"}
+          >
+            Login
+          </button>
         </form>
         <p className="last-msg text-primary">
           Don't have an account?{" "}
@@ -69,7 +83,18 @@ const Login = () => {
       </div>
       <div className="okta-login">
         <h2>Login from Okta: </h2>
-        <a href="http://localhost:8085/auth/login" target="_blank" className="btn btn-primary ms-3">Login</a>
+        <a
+          href="http://localhost:8085/auth/login"
+          target="_blank"
+          className={`btn ${userExists ? "btn-danger" : "btn-primary"} ms-3`}
+          onClick={(e) => {
+            if (userExists) {
+              e.preventDefault(); // Prevent the click action if user exists
+            }
+          }}
+        >
+          Login
+        </a>
       </div>
     </div>
   );
