@@ -1,0 +1,54 @@
+server:
+  port: 8085
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: USERSERVICE
+          uri: lb://USERSERVICE
+          predicates:
+            - Path=/users/**
+
+        - id: COLLEGESERVICE
+          uri: lb://COLLEGESERVICE
+          predicates:
+            - Path=/colleges/**
+
+        - id: RATINGSERVICE
+          uri: lb://RATINGSERVICE
+          predicates:
+            - Path=/ratings/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: '*'
+            allowCredentials: true
+#        add-to-simple-url-handler-mapping: true
+
+  config:
+    import: optional:configserver:http://localhost:8086
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:8081/eureka
+
+#okta configuration for API GATEWAY
+okta:
+  oauth2:
+    issuer: https://dev-29013301.okta.com/oauth2/default
+    audience: api://default
+    client-id: 0oakmfjse2zem6q3Z5d7
+    client-secret: 2WqDsX7a3qTaOATaI_VQ7alky9pdgMRhRIKVMRRD9oMniunX4q5KGBMoa0ZqU3jS
+    scopes: openid, profile, email, offline_access

@@ -1,0 +1,99 @@
+.signup-container {
+    width: 450px;
+    margin: 70px auto 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  .signup-container .heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .signup-container .signup-icon {
+    font-size: 30px; /* Adjust size as needed */
+    color: var(--primary-color);
+    margin-right: 10px;
+    
+  }
+  .signup-container h2 {
+    text-align: center;
+    color: black;
+  }
+  
+  .signup-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signup-container label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .signup-container input,
+  .signup-container select,
+  .signup-container textarea {
+    color: black;
+    margin-bottom: 8px;
+    padding: 8px;
+    border: 1px solid #7e7e7e;
+    border-radius: 4px;
+  }
+  .signup-container input:hover,
+  .signup-container select:hover,
+  .signup-container textarea:hover {
+    margin-bottom: 12px;
+    padding: 8px;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(76, 78, 77, 0.975); 
+  }
+  .btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .signup {
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: rgb(0, 0, 0);
+    border: none;
+    width: 100px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .signup:hover {
+    background-color: #03ff3a;
+  }
+  .reset {
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: rgb(0, 0, 0);
+    border: none;
+    width: 100px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .reset:hover {
+    background-color: #03a7ff;
+  }
+  .error-message {
+    color: red;
+    margin: 10px 0;
+  }
+  .last-msg{
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
